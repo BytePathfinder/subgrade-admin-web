@@ -1,64 +1,91 @@
 # subgrade-admin-web
-
-This template should help get you started developing with Vue 3 in Vite.
-
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
-
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
+## 项目搭建
+1. 项目创建
+~~~shell
+npm create vue
+~~~~
+2. 依赖安装
+~~~shell
 npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
+~~~
+3. 启动项目
+~~~shell
 npm run dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
+~~~
+4. 打包项目
+~~~shell
 npm run build
+~~~
+
+## 项目结构
+```
+├── README.md
+├── e2e
+│   ├── tsconfig.json
+│   └── vue.spec.ts
+├── env.d.ts
+├── eslint.config.mjs
+├── index.html
+├── node_modules
+├── package-lock.json
+├── package.json
+├── playwright.config.ts
+├── public
+│   └── favicon.ico
+├── src
+│   ├── App.vue
+│   ├── assets
+│   ├── components
+│   ├── main.ts
+│   ├── router
+│   ├── stores
+│   └── views
+├── tsconfig.app.json
+├── tsconfig.json
+├── tsconfig.node.json
+├── tsconfig.vitest.json
+├── vite.config.ts
+└── vitest.config.ts
+
 ```
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+## UI组件库
+### 安装 Element Plus
+1. 安装依赖包
+~~~shell
+npm install element-plus --save
+~~~
+2. 配置按需导入
+~~~shell
+npm install -D unplugin-vue-components unplugin-auto-import
+~~~
+   
+~~~js
+// vite.config.ts
+import { defineConfig } from 'vite'
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
-```sh
-npm run test:unit
-```
+export default defineConfig({
+  // ...
+  plugins: [
+    // ...
+    AutoImport({
+      resolvers: [ElementPlusResolver()],
+    }),
+    Components({
+      resolvers: [ElementPlusResolver()],
+    }),
+  ],
+})
+~~~
 
-### Run End-to-End Tests with [Playwright](https://playwright.dev)
+### 配置 Element Plus 组件主题色
 
-```sh
-# Install browsers for the first run
-npx playwright install
 
-# When testing on CI, must build the project first
-npm run build
 
-# Runs the end-to-end tests
-npm run test:e2e
-# Runs the tests only on Chromium
-npm run test:e2e -- --project=chromium
-# Runs the tests of a specific file
-npm run test:e2e -- tests/example.spec.ts
-# Runs the tests in debug mode
-npm run test:e2e -- --debug
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+## 安装 vueuse
+~~~shell
+npm i @vueuse/core
+~~~
